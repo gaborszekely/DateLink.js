@@ -1,0 +1,25 @@
+
+FORMAT:
+
+Functions:
+
+ 1. formatDate
+ 2. reduceDate
+
+
+formatDate:
+
+ - Arguments (3): 
+     - date | format | options
+
+     - date(optional): JS date
+     - format: String
+     - options: Object
+
+ - Description: This is the main function of the library, who'se promary purpose is to take a date and a format and return the desired date in the desired format.
+
+
+reduceDate:
+
+ - Arguments(n):
+     -   
