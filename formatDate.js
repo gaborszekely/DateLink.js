@@ -1,7 +1,9 @@
 const formatDate = (schema, date) => {
+  let final = schema,
+    counter = 0;
+
+  /* Initialize date */
   date = date ? new Date(date) : new Date();
-  const brackRegex = /(\\\[)|(\\\])/gim;
-  let final = schema;
 
   const matches = {
     m: {
@@ -152,15 +154,26 @@ const formatDate = (schema, date) => {
     }
   };
 
+  /* Loop through 'matches' object and check date schema for regex matches */
+
   for (let m in matches) {
     if (matches[m].regex.test(final)) {
+      counter++;
       final = final.replace(matches[m].regex, matches[m].val(date));
     }
   }
 
+  /* Throw error if no regex matches */
+  if (!counter) {
+    throw new Error("Please fix matches");
+  }
+
+  /* Return formatted date with backslashes removed */
+
+  const brackRegex = /(\\\[)|(\\\])/gim;
   return final.replace(brackRegex, (m, p1, p2) =>
     m.replace(p1, "[").replace(p2, "]")
   );
 };
 
-module.exports = formatDate;
+// module.exports = formatDate;
